@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .productpage {
+            display: flex;
+            gap: 10px;
+        }
+
+        .showproduct {
+            border: 1px solid black;
+            width: fit-content;
+        }
+
+        .showproduct .product {
+            margin: 10px 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="productpage">
+        {% for i in data %}
+           
+        <div class="showproduct">
+            <div class="product">
+                <h1>{{i.product_name}}</h1>
+                <h1>{{i.product_price}}</h1>
+                {% with i.id as product_id %}
+                <form action="{% url 'AddtoCart' i.id  %}" method="POST">
+                    {% csrf_token %}
+                <input type="submit" value="Add to cart">
+            </form>
+            {% endwith %}
+            </div>
+        </div>
+     
+        {% endfor %}
+    </div>
+</body>
+
+</html>
